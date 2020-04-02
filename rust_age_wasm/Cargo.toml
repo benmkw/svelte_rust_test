@@ -1,0 +1,33 @@
+[package]
+name = "age_wasm"
+version = "0.1.0"
+authors = ["Benedikt Mandelkow <benedikt.mandelkow@rwth-aachen.de>"]
+edition = "2018"
+publish = false
+
+# See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
+
+[dependencies]
+# docs https://docs.rs/age/0.3.1/age/
+age = "^0.4"
+secrecy = "0.6.0"
+#https://github.com/rust-random/rand/issues/810
+rand = { version = "0.7.3", features = ["wasm-bindgen"] }
+wasm-bindgen = "^0.2"
+
+console_error_panic_hook = { version = "^0.1"}
+wee_alloc = { version = "^0.4"}
+
+[lib]
+crate-type = ["cdylib", "rlib"]
+name = "age_wasm_lib"
+path = "src/lib.rs"
+
+[profile.release]
+# Tell `rustc` to optimize for small code size.
+opt-level = "s"
+
+# build this using wasm-pack build
+# https://github.com/rustwasm/wasm-pack-template/blob/master/Cargo.toml
+# maybe switch the allocator or something like this
+# how to pass types https://rustwasm.github.io/docs/wasm-bindgen/reference/types/number-slices.html?highlight=vec,u8#number-slices--u8---i8---u16---i16---u32---i32---u64---i64---f32--and--f64

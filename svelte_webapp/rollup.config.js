@@ -8,12 +8,15 @@ import rust from "@wasm-tool/rollup-plugin-rust";
 const production = !process.env.ROLLUP_WATCH;
 
 export default {
-	input: 'src/main.js',
+	input: { bundle: 'src/main.js' },
 	output: {
 		sourcemap: true,
 		format: 'iife',
 		name: 'app',
-		file: 'public/build/bundle.js'
+		//https://rollupjs.org/guide/en/#outputdir
+		// different from default svelte template
+		entryFileNames: "[name].js",
+		dir: 'public/build/'
 	},
 	plugins: [
 		svelte({
@@ -37,8 +40,9 @@ export default {
 		}),
 		commonjs(),
 		rust({
+			// debug enables nice backtraces in the console
 			debug: false,
-			verbose: true,
+            serverPath: "/build/"
 		}),
 
 		// In dev mode, call `npm run start` once
