@@ -1,4 +1,5 @@
 import App from './App.svelte';
+
 import wasm from './../../rust_age_wasm/Cargo.toml';
 
 const init = async () => {
