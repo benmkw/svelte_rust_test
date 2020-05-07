@@ -22,6 +22,48 @@ extern "C" {
 }
 
 #[wasm_bindgen]
+pub fn interpret(input: String) -> i64 {
+    log(&format!("hello from rust {}", &input));
+
+    let res = scheme_lib::run(&input).unwrap();
+    if let scheme_lib::Expression::Number(i) = *res {
+        return i;
+    } else {
+        panic!("result could not be computed")
+    }
+}
+
+// #[wasm_bindgen]
+// pub fn sign(input: String) -> String {
+//     log(&format!("hello from rust signify {}", &input));
+//     // pub fn sign_lib(seckey: &[u8], msg: &[u8], embed: bool) -> Result<Vec<u8>> {
+//     let seckey = "some secrecy";
+//     String::from_utf8(signify_lib::sign_lib(&seckey.as_bytes(), &input.as_bytes(), true).unwrap())
+//         .unwrap()
+// }
+
+// #[wasm_bindgen]
+// pub fn verify(input: String) -> String {
+//     log(&format!("hello from rust signify {}", &input));
+//     // pub fn verify_lib(pubkey: &[u8], msg: &[u8], signature_data: &[u8], embed: bool) -> Result<()> {
+
+//     let pubkey = "some pubkey";
+//     let signature_data = "some signature_data";
+
+//     let res = signify_lib::verify_lib(
+//         &pubkey.as_bytes(),
+//         &input.as_bytes(),
+//         &signature_data.as_bytes(),
+//         true,
+//     );
+
+//     match res {
+//         Ok(()) => "verfied as ok".to_string(),
+//         Err(e) => format!("not ok {}", e),
+//     }
+// }
+
+#[wasm_bindgen]
 pub fn enc(plaintext: String, passphrase: String) -> Vec<u8> {
     let encryptor = age::Encryptor::with_user_passphrase(Secret::new(passphrase.to_owned()));
 

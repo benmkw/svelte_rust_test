@@ -1,5 +1,8 @@
 # using (r)age in the browser in a svelte app
 
+needs wasm-pack installed https://github.com/rustwasm/wasm-pack
+`cd svelte_webapp && npm run dev`
+
 ## understand/ use material theming etc.
 after managing to set the sass include path I need to further dig into how to use this, the current UI does not show the benefits of using all the dependencies compared to just handwritten html/js ;)
 
@@ -11,4 +14,4 @@ or more recent https://github.com/codediodeio/electron-forge-svelte
 and maybe later
 https://keminglabs.com/blog/building-a-fast-electron-app-with-rust/
 
-add signify compiled to wasm
+add signify compiled to wasm after refactoring it for usage as a library

@@ -9,7 +9,10 @@ const init = async () => {
         target: document.body,
         props: {
             enc: wasmer.enc,
-            dec: wasmer.dec
+            dec: wasmer.dec,
+            interpret: wasmer.interpret,
+            sign: wasmer.sign,
+            verify: wasmer.verify,
         }
     });
 
